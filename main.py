@@ -1,4 +1,4 @@
-# --- WELCOME TO THE EE CIRCUIT ANALYZER V1.0 ---
+# --- WELCOME TO THE EE CIRCUIT ANALYZER ---
 
 # HIRING THE MANAGER: We only need to import the 'dc_menu' manager now.
 # The manager will handle calling the individual workers.
@@ -7,6 +7,7 @@ from network_engine import network_menu
 from ac_engine import ac_menu
 from component_engine import component_menu
 from digital_engine import digital_menu
+from visual_engine import visual_menu
 
 def main_menu():
     # THE FACTORY SHIFT: Keeps the main lobby open
@@ -19,6 +20,7 @@ def main_menu():
         print("3. AC & Complex Numbers (Module 3)")
         print("4. Component Behavior (Module 4)")
         print("5. Digital Logic (Module 5)")
+        print("6. Visual Architecture (Module 6) ")
         print("0. EXIT PROTOCOL")
         print("=" * 40)
 
@@ -45,6 +47,10 @@ def main_menu():
         elif choice == '5':
             print("\n>>> ENTERING DIGITAL LOGIC ROOM...")
             digital_menu() # Calling the Module 5 Manager
+
+        elif choice == '6':
+            print("\n>>> ENTERING VISUAL ARCHITECTURE ROOM...")
+            visual_menu() # Calling the Module 6 Manager
 
         elif choice == '0':
             print("\nShutting down the factory. Goodbye.")
