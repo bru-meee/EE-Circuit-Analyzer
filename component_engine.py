@@ -1,8 +1,8 @@
 # component_engine.py
-import math  # RENTING HEAVY MACHINERY: For exponential decay (e^-t/tau)
+import math  # TIER 6: RENTING HEAVY MACHINERY (For exponentials and square roots)
 
 
-def calculate_transients():
+def calculate_first_order_transients():
     print("\n--- FIRST-ORDER TRANSIENT RESPONSE ---")
     print("1. RC Circuit (Resistor-Capacitor)")
     print("2. RL Circuit (Resistor-Inductor)")
@@ -55,10 +55,61 @@ def calculate_transients():
         print("\n[!] INPUT ERROR: The factory only accepts heavy numbers.")
     except ZeroDivisionError:
         print("\n[!] FATAL ERROR: Resistance cannot be zero in these circuits.")
+    # ... (V1.0 Code remains identical, utilizing Tier 5 Safety Nets and Tier 1 Tupperware) ...
+    pass
+
+
+def calculate_second_order_rlc():
+    print("\n--- 🌊 SECOND-ORDER RLC TRANSIENT ENGINE ---")
+    print("1. Series RLC Circuit")
+    print("2. Parallel RLC Circuit")
+
+    # TIER 1: THE TRAIN TRACK DISPATCHER (if/elif/else)
+    mode = input("Select circuit topology (1 or 2): ")
+
+    # TIER 5: THE SAFETY NET
+    try:
+        if mode in ['1', '2']:
+            r = float(input("\nEnter Resistance (Ohms): "))
+            l = float(input("Enter Inductance (Henries): "))
+            c = float(input("Enter Capacitance (Farads): "))
+
+            # TIER 6: Heavy Machinery calculating the Resonant Frequency
+            omega = 1 / math.sqrt(l * c)
+
+            if mode == '1':
+                print("\n>>> TRACK 1: SERIES RLC TOPOLOGY LOADED")
+                alpha = r / (2 * l)
+            else:
+                print("\n>>> TRACK 2: PARALLEL RLC TOPOLOGY LOADED")
+                alpha = 1 / (2 * r * c)
+
+            # Calculate Damping Ratio
+            zeta = alpha / omega
+
+            print("\n[SUCCESS] RLC PARAMETERS EXTRACTED:")
+            print(f"Attenuation (\u03B1): {alpha:.4f} Np/s")
+            print(f"Resonant Frequency (\u03C9): {omega:.4f} rad/s")
+            print(f"Damping Ratio (\u03B6): {zeta:.4f}")
+
+            # Determine Damping Type based on roots
+            if alpha > omega:
+                print(">>> SYSTEM STATUS: OVERDAMPED (Roots are real and not equal)")
+            elif alpha < omega:
+                print(">>> SYSTEM STATUS: UNDER-DAMPED (Roots are complex. Oscillation detected!)")
+            else:
+                print(">>> SYSTEM STATUS: CRITICALLY DAMPED (Roots are real and equal)")
+        else:
+            print("\n[!] Invalid track selection.")
+
+    except ValueError:
+        print("\n[!] INPUT ERROR: The factory only accepts heavy numbers.")
+    except ZeroDivisionError:
+        print("\n[!] FATAL ERROR: Resistance/Inductance/Capacitance cannot be zero in this topology.")
 
 
 def calculate_op_amp():
-    print("\n--- OP-AMP GAIN CALCULATOR ---")
+    print("\n--- 🎛️ OP-AMP GAIN CALCULATOR ---")
 
     try:
         r_in = float(input("Enter Input Resistance R_in (Ohms): "))
@@ -71,10 +122,10 @@ def calculate_op_amp():
         mode = input("Selection (1 or 2): ")
 
         # TIER 2: THE VENDING MACHINE (Dictionary)
-        # We load the exact gain calculations into slots "1" and "2"
+        # Loading the exact gain formulas into slots "1" and "2"
         gains = {
-            "1": -(r_f / r_in),  # Slot 1: Inverting Formula
-            "2": 1 + (r_f / r_in)  # Slot 2: Non-Inverting Formula
+            "1": -(r_f / r_in),
+            "2": 1 + (r_f / r_in)
         }
 
         # THE KEYPAD: If the user types a valid slot...
@@ -87,7 +138,7 @@ def calculate_op_amp():
             print(f"Gain (Av): {gain:.4f}")
             print(f"Output Voltage (V_out): {v_out:.4f} V")
         else:
-            print("\n[!] Invalid selection.")
+            print("\n[!] Invalid keypad selection.")
 
     except ValueError:
         print("\n[!] INPUT ERROR: The factory only accepts heavy numbers.")
@@ -95,25 +146,28 @@ def calculate_op_amp():
         print("\n[!] FATAL ERROR: Input Resistance (R_in) cannot be zero.")
 
 
-# --- THE DEPARTMENT MANAGER ---
+# --- THE DEPARTMENT MANAGER (Sub-Contractor) ---
 def component_menu():
     while True:
-        print("\n" + "-" * 40)
-        print("⚙️ MODULE 4: COMPONENT BEHAVIOR ⚙️")
-        print("-" * 40)
-        print("1. Transient Response (RC / RL)")
-        print("2. Op-Amp Gain Calculator")
-        print("0. RETURN TO MAIN LOBBY")
-        print("-" * 40)
+        print("\n" + "-" * 50)
+        print("⚙️ MODULE 4: COMPONENT BEHAVIOR (V2.0) ⚙️")
+        print("-" * 50)
+        print("1. First-Order Transient Response (RC / RL)")
+        print("2. Second-Order Transient Response (RLC)")
+        print("3. Op-Amp Gain Calculator")
+        print("0. RETURN TO MAIN FACTORY LOBBY")
+        print("-" * 50)
 
-        choice = input("Select a Component tool (0-2): ")
+        choice = input("Select a Component tool (0-3): ")
 
         if choice == '1':
-            calculate_transients()
+            calculate_first_order_transients()
         elif choice == '2':
+            calculate_second_order_rlc()
+        elif choice == '3':
             calculate_op_amp()
         elif choice == '0':
             print("\nReturning to Main Factory Lobby...")
             break
         else:
-            print("\n[!] Invalid selection. Enter 0-2.")
+            print("\n[!] Invalid selection. Enter 0-3.")
